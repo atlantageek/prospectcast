@@ -1,0 +1,6 @@
+table {
+    width: calc(100% - 20px);
+    padding-left:10px;
+  }
+  :any-link { color: white }
+  :any-link:active { color: white }

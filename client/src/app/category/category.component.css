@@ -1,0 +1,26 @@
+.category-container {
+    height: 100%;
+    margin: 10px;
+    border: 1px solid #555;
+  }
+  /* unvisited link */
+a:link {
+    color: white;
+  }
+  
+  /* visited link */
+  a:visited {
+    color: white;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: white;
+  }
+  
+  /* selected link */
+  a:active {
+    color: white;
+  }
+  :any-link { color: white }
+:any-link:active { color: white }

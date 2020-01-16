@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+sales_one:
+  dt: 2020-01-07 22:06:56
+  location_id: 1
+  product_id: 1
+  price_cents: 1
+  count: 1
+  location: locations_one
+  product: products_one
+
+sales_two:
+  dt: 2020-01-07 22:06:56
+  location_id: 1
+  product_id: 1
+  price_cents: 1
+  count: 1
+  location: locations_two
+  product: products_two
