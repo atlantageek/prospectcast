@@ -1,2 +1,5 @@
 
 <h2>{{(productData | async)?.name}} [{{product_id}}]</h2>
+<h1>Bar Chart</h1>
+
+<app-calendar-chart [data]="salesData | async" ></app-calendar-chart>

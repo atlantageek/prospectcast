@@ -9,7 +9,7 @@ import { BehaviorSubject} from 'rxjs';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit {
-  displayedColumns: string[] = ['name'];
+  displayedColumns: string[] = ['name', 'count'];
 
   categories:BehaviorSubject<{}> = new BehaviorSubject(null);
 

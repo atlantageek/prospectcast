@@ -3,7 +3,10 @@ class SalesController < ApplicationController
 
   # GET /sales
   def index
-    @sales = Sale.all
+    
+    product_id = params[:product_id]
+    @product = Product.find(product_id)
+    @sales = @product.sales
 
     render json: @sales
   end

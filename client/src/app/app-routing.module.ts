@@ -5,6 +5,7 @@ import { MatTableModule,MatSidenavModule } from '@angular/material';
 
 import { CategoryComponent } from './category/category.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { FullproductComponent } from './fullproduct/fullproduct.component';
 //const routes: Routes = [];
 const routes: Routes = [
   {
@@ -25,6 +26,11 @@ const routes: Routes = [
   {
     path: 'productdetail/:product_id',
     component: ProductDetailComponent,
+    data: { title: 'Category List' }
+  },
+  {
+    path: 'fullproduct',
+    component: FullproductComponent,
     data: { title: 'Category List' }
   },
   { path: '',

@@ -9,6 +9,10 @@
         <th mat-header-cell *matHeaderCellDef> Name </th>
         <td mat-cell *matCellDef="let element"> <a [routerLink]="['/productdetail', element.id]">{{element.name}}</a></td>
     </ng-container>
+    <ng-container matColumnDef="daily_sales">
+        <th mat-header-cell *matHeaderCellDef> Daily Sales </th>
+        <td mat-cell *matCellDef="let element"> {{element.daily_sales}} </td>
+    </ng-container>
     <ng-container matColumnDef="category_ident">
         <th mat-header-cell *matHeaderCellDef> Category </th>
         <td mat-cell *matCellDef="let element"> {{element.category_ident}} </td>

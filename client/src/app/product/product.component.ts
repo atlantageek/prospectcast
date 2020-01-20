@@ -10,7 +10,7 @@ import { ActivatedRoute,Event, NavigationStart, RoutesRecognized,
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  displayedColumns: string[] = ['id','name','category_ident'];
+  displayedColumns: string[] = ['id','name','daily_sales','category_ident'];
 
   products:BehaviorSubject<{}> = new BehaviorSubject(null);
 

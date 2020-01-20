@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { RestService } from '../rest.service';
+import { RestService, BarDataModel, SalesModel } from '../rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject} from 'rxjs';
-
+import { BehaviorSubject, Observable, timer} from 'rxjs';
+import {take} from 'rxjs/operators';
 interface Product {
   name:string,
   id:number,
   category_id:number
 }
+
 
 
 @Component({
@@ -17,7 +18,10 @@ interface Product {
 })
 export class ProductDetailComponent implements OnInit {
   product_id=null;
+  data:BehaviorSubject<BarDataModel[]> = new BehaviorSubject<BarDataModel[]>([{letter: 'a', frequency: 3}])
+
   productData:BehaviorSubject<Product>=new BehaviorSubject(null);
+  salesData:BehaviorSubject<SalesModel[]>=new BehaviorSubject(null);
   constructor(public rest:RestService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
@@ -26,6 +30,7 @@ export class ProductDetailComponent implements OnInit {
       this.product_id = +params['product_id']
       this.getProduct(this.product_id)
     })
+
   }
   getProduct(product_id: number) {
     
@@ -33,5 +38,9 @@ export class ProductDetailComponent implements OnInit {
       console.log(data);
       this.productData.next( data);
     });
+    this.rest.getSalesForProduct(product_id).subscribe((data: SalesModel[]) => {
+      console.log(data);
+      this.salesData.next(data);
+    })
   }
 }

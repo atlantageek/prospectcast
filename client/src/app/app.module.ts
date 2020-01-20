@@ -11,7 +11,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { CategoryComponent } from './category/category.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component'  
-
+import { AgGridModule } from 'ag-grid-angular';
+import { FullproductComponent } from './fullproduct/fullproduct.component';
+import { BarChartComponent } from './components/bar-chart/bar-chart.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 
 @NgModule({
@@ -19,7 +22,10 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     AppComponent,
     ProductComponent,
     CategoryComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    FullproductComponent,
+    BarChartComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +33,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
+    AgGridModule.withComponents([])
   ],
   providers: [RestService],
   bootstrap: [AppComponent]

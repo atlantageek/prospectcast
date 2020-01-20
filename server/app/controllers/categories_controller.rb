@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
   
   # GET /categories
   def index
-    @categories = ProductCategory.all
+    @categories = CategoryStat.all
 
     render json: @categories
   end
