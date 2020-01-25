@@ -16,10 +16,13 @@ const httpOptions = {
   })
 };
 export interface BarDataModel {
-  letter: string;
-  frequency: number;
+  dt: Date;
+  count: number;
 }
-
+export interface LineDataModel {
+  dt: Date;
+  count: number;
+}
 @Injectable({
   providedIn: 'root'
 })

@@ -22,6 +22,7 @@ export class CalendarComponent implements  OnChanges {
   maxVal
   constructor() { }
   processData(){
+    
     let fullDateData: SalesModel[] = []
     let dts= this.data.map(d=> d.dt.getTime())
     let vals = this.data.map(d=>d.count)
@@ -48,14 +49,14 @@ export class CalendarComponent implements  OnChanges {
     else return "#008800"
   }
   private createChart() {
+    if (this.data == null) return;
     let data = this.processData();
-    console.log("create chart")
-    d3.select('svg').remove();
+    d3.select('.calendar-svg').remove();
     
     const element = this.chartContainer.nativeElement;
 
-    console.log(data)
-    const svg = d3.select(element).append('svg')
+
+    const svg = d3.select(element).append('svg').attr('class','calendar-svg')
         // .attr('width', element.offsetWidth)
         // .attr('height', element.offsetHeight);
     
@@ -89,7 +90,7 @@ export class CalendarComponent implements  OnChanges {
       .attr("y", d => (this.countDay(d) + 0.5) * this.cellSize)
       .attr("dy", "0.31em")
       .text(this.formatDay);
-    console.log(year)
+
      year.append("g")
       .selectAll("rect")
       .data(d => d.values)
@@ -99,7 +100,7 @@ export class CalendarComponent implements  OnChanges {
         .attr("x", d=> {return d3.utcSunday.count(d3.utcYear(d["dt"]), d["dt"]) * this.cellSize + 0.5}) 
         //.attr("x", d => {d3.utcSunday.count(d3.utcYear(d.date), d.date) * this.cellSize + 0.5)}
         .attr("y", d => d["dt"].getUTCDay() * this.cellSize + 0.5)
-        .attr("fill", d => this.color(d))
+        .attr("fill", d => this.perc2color(d))
     //  .append("title")
     //    .text(d => `${"SMTWTFS"[d.getUTCDay()]}: ${format(d.value)}`);
 
@@ -147,6 +148,24 @@ export class CalendarComponent implements  OnChanges {
         : d === n ? `M${(w + 1) * this.cellSize},0`
         : `M${(w + 1) * this.cellSize},0V${d * this.cellSize}H${w * this.cellSize}`}V${n * this.cellSize}`;
   }
-  
+
+  private perc2color(val) {
+
+    let perc = val.count * 100.0/this.maxVal;
+    var r, g, b = 0;
+    if (perc ==0) {
+      return '#cccccc'
+    }
+    else if(perc < 50) {
+      r = 255;
+      g = Math.round(5.1 * perc);
+    }
+    else {
+      g = 255;
+      r = Math.round(510 - 5.10 * perc);
+    }
+    var h = r * 0x10000 + g * 0x100 + b * 0x1;
+    return '#' + ('000000' + h.toString(16)).slice(-6);
+  }
 }
 

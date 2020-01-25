@@ -3,6 +3,7 @@ import { RestService, BarDataModel, SalesModel } from '../rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, timer} from 'rxjs';
 import {take} from 'rxjs/operators';
+import { now } from 'd3';
 interface Product {
   name:string,
   id:number,
@@ -18,7 +19,7 @@ interface Product {
 })
 export class ProductDetailComponent implements OnInit {
   product_id=null;
-  data:BehaviorSubject<BarDataModel[]> = new BehaviorSubject<BarDataModel[]>([{letter: 'a', frequency: 3}])
+  data:BehaviorSubject<BarDataModel[]> = new BehaviorSubject<BarDataModel[]>([])
 
   productData:BehaviorSubject<Product>=new BehaviorSubject(null);
   salesData:BehaviorSubject<SalesModel[]>=new BehaviorSubject(null);

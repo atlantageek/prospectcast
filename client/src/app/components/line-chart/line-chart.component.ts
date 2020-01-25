@@ -1,18 +1,18 @@
 import { Component, ElementRef,Input, OnChanges,ViewChild, ViewEncapsulation  } from '@angular/core';
 import * as d3 from 'd3';
-import {BarDataModel} from '../../rest.service'
+import {LineDataModel} from '../../rest.service'
 @Component({
-  selector: 'app-bar-chart',
-  templateUrl: './bar-chart.component.html',
-  styleUrls: ['./bar-chart.component.css']
+  selector: 'app-line-chart',
+  templateUrl: './line-chart.component.html',
+  styleUrls: ['./line-chart.component.css']
 })
-export class BarChartComponent implements  OnChanges {
+export class LineChartComponent implements  OnChanges {
 
   @ViewChild('chart', {static: false})
   private chartContainer: ElementRef;
 
   @Input()
-  data: BarDataModel[];
+  data: LineDataModel[];
 
   margin = {top: 20, right: 20, bottom: 30, left: 40};
 
@@ -25,10 +25,10 @@ export class BarChartComponent implements  OnChanges {
   }
 
   private createChart(): void {
-    d3.select('.bar-svg').remove();
+    d3.select('.line-svg').remove();
 
     const element = this.chartContainer.nativeElement;
-    const data = this.data;
+    const data = this.data.sort((a,b)=> a.dt.getTime() - b.dt.getTime());
 
     const svg = d3.select(element).append('svg')
       .attr('width', element.offsetWidth)
@@ -53,9 +53,15 @@ export class BarChartComponent implements  OnChanges {
     const y = d3
       .scaleLinear()
       .rangeRound([contentHeight, 0])
-      .domain([0, d3.max(data, d => d.count)]);
+      .domain([0,100]);
         // define the y axis
             // define the x scale (horizontal)
+            
+
+      var line = d3.line()
+        .x(function(d) { return x(d['dt']); })
+        .y(function(d) { return y(d['count']); })
+ 
 
 
     const g = svg.append('g')
@@ -68,21 +74,32 @@ export class BarChartComponent implements  OnChanges {
 
     g.append('g')
       .attr('class', 'axis axis--y')
-      .call(d3.axisLeft(y).ticks(10, '%'))
+      .call(d3.axisLeft(y).ticks(10, ''))
       .append('text')
         .attr('transform', 'rotate(-90)')
         .attr('y', 6)
         .attr('dy', '0.71em')
         .attr('text-anchor', 'end')
         .text('Frequency');
+    
 
-    g.selectAll('.bar')
-      .data(data)
-      .enter().append('rect')
-        .attr('class', 'bar')
-        .attr('x', d => x(d.dt))
-        .attr('y', d => y(d.count > 0 ? d.count : 0))
-        .attr('width', 1)//TODO  
-        .attr('height',  d => {var v =d.count > 0 ?d.count : 0; console.log(v);return (contentHeight - y(v))});
+
+
+       
+         g.append('path')
+         .datum(data)
+        .attr("class", "line")
+        .style("stroke", "#000000")
+        .attr("fill","none")
+        .attr("d", line);
+
+    // g.selectAll('.line')
+    //   .data(data)
+    //   .enter().append('rect')
+    //     .attr('class', 'line')
+    //     .attr('x', d => x(d.dt))
+    //     .attr('y', d => y(d.count > 0 ? d.count : 0))
+    //     .attr('width', 1)//TODO  
+    //     .attr('height',  d => {var v =d.count > 0 ?d.count : 0; console.log(v);return (contentHeight - y(v))});
   }
 }

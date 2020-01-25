@@ -1,5 +1,12 @@
 
 <h2>{{(productData | async)?.name}} [{{product_id}}]</h2>
-<h1>Bar Chart</h1>
+<h1>Bar Charts</h1>
+<mat-tab-group>
+        <mat-tab label="Weekly Sales" style="height:100%;width:100%;">
+                <app-line-chart [data]="salesData | async" ></app-line-chart>
+            </mat-tab>
+    <mat-tab label="Daily Sales" style="height:100%;width:100%;">
+        <app-calendar-chart [data]="salesData | async" ></app-calendar-chart>
+    </mat-tab>
 
-<app-calendar-chart [data]="salesData | async" ></app-calendar-chart>
+</mat-tab-group>

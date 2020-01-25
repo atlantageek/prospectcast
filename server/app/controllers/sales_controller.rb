@@ -6,11 +6,18 @@ class SalesController < ApplicationController
     
     product_id = params[:product_id]
     @product = Product.find(product_id)
+    @sales = @product.sales.group('dt').select("sum(count) as count,dt").order("dt").limit(10000)
+
+    render json: @sales
+  end
+  def index2
+    
+    product_id = params[:product_id]
+    @product = Product.find(product_id)
     @sales = @product.sales
 
     render json: @sales
   end
-
   # GET /sales/1
   def show
     render json: @sale

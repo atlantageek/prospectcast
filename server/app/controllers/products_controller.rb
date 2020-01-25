@@ -21,7 +21,7 @@ class ProductsController < ApplicationController
 
   def product_stats_by_category()
     category_id = params["category_id"]
-    result = Product.left_outer_joins(:sales).where(category_ident: category_id.to_i).select("products.id as id, products.name as name, count(distinct location_id), sum(count)/ (DATE_PART('day', max(dt) - min(dt)) + 1) as daily_sales").group('products.id', 'products.name')
+    result = Product.left_outer_joins(:sales).where(category_ident: category_id.to_i).select("products.id as id,max(dt) as maxdt, min(dt) as mindt, products.name as name, count(distinct location_id), sum(count)/ (DATE_PART('day', max(dt) - min(dt)) + 1) as daily_sales").group('products.id', 'products.name')
     render json: result
   end
 
