@@ -1,8 +1,8 @@
 .water {
-    fill: #00248F;
-  }
+        fill: #00248F;
+    }
   
-  .land {
+ .land {
     fill: #A98B6F;
     stroke: #FFF;
     stroke-width: 0.7px;
