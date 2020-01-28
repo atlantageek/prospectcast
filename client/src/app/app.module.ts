@@ -16,6 +16,7 @@ import { FullproductComponent } from './fullproduct/fullproduct.component';
 import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { LineChartComponent } from './components/line-chart/line-chart.component';
+import { GlobeComponent } from './components/globe/globe.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { LineChartComponent } from './components/line-chart/line-chart.component
     FullproductComponent,
     BarChartComponent,
     LineChartComponent,
-    CalendarComponent
+    CalendarComponent,
+    GlobeComponent
   ],
   imports: [
     BrowserModule,

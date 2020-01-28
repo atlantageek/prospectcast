@@ -58,7 +58,7 @@ export class LineChartComponent implements  OnChanges {
             // define the x scale (horizontal)
             
 
-      var line = d3.line<LineDataModel>()
+      var line = d3.line<LineDataModel>() 
         .x(function(d) { return x(d['dt']); })
         .y(function(d) { return y(d['count']); })
  

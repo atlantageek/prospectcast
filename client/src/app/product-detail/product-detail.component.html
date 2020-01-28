@@ -8,5 +8,7 @@
     <mat-tab label="Daily Sales" style="height:100%;width:100%;">
         <app-calendar-chart [data]="salesData | async" ></app-calendar-chart>
     </mat-tab>
-
+    <mat-tab label="Locations" style="height:100%;width:100%;">
+        <app-globe ></app-globe>
+    </mat-tab>
 </mat-tab-group>
